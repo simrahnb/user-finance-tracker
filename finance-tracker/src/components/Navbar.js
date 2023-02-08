@@ -6,8 +6,7 @@ import { useLogout } from "../hooks/useLogout";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
-
-    const { logout } = useLogout()
+  const { logout } = useLogout();
 
   return (
     <nav className={styles.navbar}>
@@ -20,7 +19,9 @@ export default function Navbar() {
           <Link to="/signup">Signup</Link>
         </li>
         <li>
-            <button className="btn" onClick={logout}>Logout</button>
+          <button className="btn" onClick={logout}>
+            Logout
+          </button>
         </li>
       </ul>
     </nav>
