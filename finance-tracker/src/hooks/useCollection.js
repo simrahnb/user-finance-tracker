@@ -38,6 +38,6 @@ export const useCollection = (collection, _query, _orderBy) => {
     );
 
     // unsubscribe on unmount
-    return () => unsubscribe();
+    return () => unsubsribe();
   }, [collection, query, orderBy]);
 };
