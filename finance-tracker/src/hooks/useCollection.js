@@ -7,17 +7,17 @@ export const useCollection = (collection, _query, _orderBy) => {
 
   //using ref so that there is no infinite loop in useEffect
   // _query is an array and is "different" on every function call
-  const query = useRef(_query).current
-  const orderBy = useRef(_orderBy).current
+  const query = useRef(_query).current;
+  const orderBy = useRef(_orderBy).current;
 
   useEffect(() => {
     let ref = projectFirestore.collection(collection);
 
     if (query) {
-        ref = ref.where(...query)
+      ref = ref.where(...query);
     }
     if (orderBy) {
-        ref = ref.orderBy(...orderBy)
+      ref = ref.orderBy(...orderBy);
     }
 
     const unsubsribe = ref.onSnapshot(
