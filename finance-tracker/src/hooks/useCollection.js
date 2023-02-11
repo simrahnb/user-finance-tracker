@@ -1,29 +1,31 @@
-import { useEffect, useState } from "react"
-import { projectFirestore } from "../firebase/config"
+import { useEffect, useState } from "react";
+import { projectFirestore } from "../firebase/config";
 
 export const useCollection = (collection) => {
-        const [documents, setDocuments] = useState(null)
-        const [error, setError] = useState(null)
+  const [documents, setDocuments] = useState(null);
+  const [error, setError] = useState(null);
 
-        useEffect(() => {
-            let ref = projectFirestore.collection(collection)
+  useEffect(() => {
+    let ref = projectFirestore.collection(collection);
 
-            const unsubsribe = ref.onSnapshot((snapshot) => {
-                let results = [] 
-                snapshot.docs.forEach(doc => {
-                    results.push({ ...doc.data(), id: doc.id })
-                })
+    const unsubsribe = ref.onSnapshot(
+      (snapshot) => {
+        let results = [];
+        snapshot.docs.forEach((doc) => {
+          results.push({ ...doc.data(), id: doc.id });
+        });
 
-                // update state
-                setDocuments(results)
-                setError(null)
-            }, (error) => {
-                console.log(error)
-                setError('could not fetch the data')
-            })
+        // update state
+        setDocuments(results);
+        setError(null);
+      },
+      (error) => {
+        console.log(error);
+        setError("could not fetch the data");
+      }
+    );
 
-            // unsubscribe on unmount
-            return () => unsubscribe()
-
-        }, [collection])
-}
+    // unsubscribe on unmount
+    return () => unsubscribe();
+  }, [collection]);
+};
